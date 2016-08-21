@@ -97,14 +97,29 @@ $(document).ready (function(){
       if (ballHitsLeftWall()) {
         playerBWin();
       }
+      var ballX = ball.x + ball.speed * ball.directionX;
+      var ballY = ball.y + ball.speed * ball.directionY;
+
+      if (ballX >= pingpong.paddleA.x && ballX < pingpong.paddleA.x + pingpong.paddleA.width) {
+        if (ballY <= pingpong.paddleA.y + pingpong.paddleA.height && ballY >= pingpong.paddleA.y) {
+          ball.directionX = 1;
+        }
+      }
+
+      if (ballX + pingpong.ball.radius >= pingpong.paddleB.x && ballX < pingpong.paddleB.x + pingpong.paddleB.width) {
+        if (ballY <= pingpong.paddleB.y + pingpong.paddleB.height && ballY >= pingpong.paddleB.y) {
+          ball.directionX = -1;
+        }
+      }
+
       ball.x += ball.speed * ball.directionX;
       ball.y += ball.speed * ball.directionY;
     }
     function renderBall() {
       var ball = pingpong.ball;
       $("#ball").css({
-        "left": ball.x + ball.speed * ball.directionX,
-        "top": ball.y + ball.speed * ball.directionY
+        "left" : ball.x + ball.speed * ball.directionX,
+        "top" : ball.y + ball.speed * ball.directionY
       });
     }
 
