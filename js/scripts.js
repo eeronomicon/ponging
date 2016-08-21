@@ -27,6 +27,7 @@ $(document).ready (function(){
         speed: 5,
         x: 150,
         y: 100,
+        radius: 20,
         directionX: 1,
         directionY: 1
       }
@@ -62,6 +63,7 @@ $(document).ready (function(){
     }
     function gameloop() {
       moveBall();
+      autoMovePaddleA();
     }
     function ballHitsTopBottom() {
       var y = pingpong.ball.y + pingpong.ball.speed * pingpong.ball.directionY;
@@ -121,6 +123,17 @@ $(document).ready (function(){
         "left" : ball.x + ball.speed * ball.directionX,
         "top" : ball.y + ball.speed * ball.directionY
       });
+    }
+
+    function autoMovePaddleA() {
+      var speed = 4;
+      var direction = 1;
+
+      var paddleY = pingpong.paddleA.y + pingpong.paddleA.height/2;
+      if (paddleY > pingpong.ball.y) {
+        direction = -1;
+      }
+      pingpong.paddleA.y += speed * direction;
     }
 
     init();
