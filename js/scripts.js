@@ -6,6 +6,8 @@ $(document).ready (function(){
 
   (function($) {
     var pingpong = {
+      scoreA: 0,
+      scoreB: 0,
       paddleA: {
         x: 50,
         y: 100,
@@ -76,6 +78,8 @@ $(document).ready (function(){
       return pingpong.ball.x + pingpong.ball.speed * pingpong.ball.directionX < 0;
     }
     function playerAWin() {
+      pingpong.scoreA += 1;
+      $("#score-a").text(pingpong.scoreA);
       // reset ball
       pingpong.ball.x = 250;
       pingpong.ball.y = 100;
@@ -83,6 +87,8 @@ $(document).ready (function(){
       pingpong.ball.directionX = -1;
     }
     function playerBWin() {
+      pingpong.scoreB += 1;
+      $("#score-b").text(pingpong.scoreB);
       // reset ball
       pingpong.ball.x = 150;
       pingpong.ball.y = 100;
@@ -126,7 +132,7 @@ $(document).ready (function(){
     }
 
     function autoMovePaddleA() {
-      var speed = 4;
+      var speed = 3.2;
       var direction = 1;
 
       var paddleY = pingpong.paddleA.y + pingpong.paddleA.height/2;
